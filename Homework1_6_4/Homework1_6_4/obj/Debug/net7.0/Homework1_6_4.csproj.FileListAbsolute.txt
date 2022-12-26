@@ -1,0 +1,15 @@
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/bin/Debug/net7.0/Homework1_6_4
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/bin/Debug/net7.0/Homework1_6_4.deps.json
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/bin/Debug/net7.0/Homework1_6_4.runtimeconfig.json
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/bin/Debug/net7.0/Homework1_6_4.dll
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/bin/Debug/net7.0/Homework1_6_4.pdb
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.csproj.AssemblyReference.cache
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.GeneratedMSBuildEditorConfig.editorconfig
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.AssemblyInfoInputs.cache
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.AssemblyInfo.cs
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.csproj.CoreCompileInputs.cache
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.dll
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/refint/Homework1_6_4.dll
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.pdb
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/Homework1_6_4.genruntimeconfig.cache
+/Users/pavelinozemcev/Projects/LOCAL_PROJECTS/Homework1_6_4/Homework1_6_4/obj/Debug/net7.0/ref/Homework1_6_4.dll
