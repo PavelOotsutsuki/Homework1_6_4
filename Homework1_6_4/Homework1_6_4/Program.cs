@@ -8,14 +8,14 @@ namespace Homework1_6_4
 {
     class Program
     {
-        const string CaseTakeCard = "1";
-        const string CaseAddCardInTable = "2";
-        const string CaseShowAllCardsInHand = "3";
-        const string CaseEndTurn = "4";
-        const string CaseExit = "5";
-
         static void Main(string[] args)
         {
+            const string CaseTakeCard = "1";
+            const string CaseAddCardInTable = "2";
+            const string CaseShowAllCardsInHand = "3";
+            const string CaseEndTurn = "4";
+            const string CaseExit = "5";
+
             Player player = new Player();
             bool isWork = true;
 
@@ -37,18 +37,23 @@ namespace Homework1_6_4
                     case CaseTakeCard:
                         player.TakeCard();
                         break;
+
                     case CaseAddCardInTable:
                         player.AddCardInTable();
                         break;
+
                     case CaseShowAllCardsInHand:
                         player.ShowAllCardsInHand();
                         break;
+
                     case CaseEndTurn:
                         player.EndTurn();
                         break;
+
                     case CaseExit:
                         isWork = false;
                         break;
+
                     default:
                         Console.WriteLine("Введена неверная команда");
                         break;
@@ -73,15 +78,16 @@ namespace Homework1_6_4
         private List<Card> _hand = new List<Card>();
         private List<Card> _burnedCards = new List<Card>();
         private Table _table = new Table();
-        private Stack <Card> _allTakenCards = new Stack<Card>();
+        private Stack<Card> _allTakenCards = new Stack<Card>();
 
 
-        public Player(int startCardsInHand=4, int maxCardsInHand=10, int mana=1, int maxMana=10)
+        public Player(int startCardsInHand = 4, int maxCardsInHand = 10, int mana = 1, int maxMana = 10)
         {
             _maxCardsInHand = maxCardsInHand;
             _mana = mana;
             _maxMana = maxMana;
             _manaInTurn = _mana;
+
 
             for (int i = 0; i < startCardsInHand; i++)
             {
@@ -112,26 +118,68 @@ namespace Homework1_6_4
 
         public void ShowAllCardsInHand()
         {
-            ShowAllCardsStats(_hand);
-        }
-
-        private void ShowAllCardsStats(List<Card> cards)
-        {
-            for (int i = 0; i < cards.Count; i++)
+            for (int i = 0; i < _hand.Count; i++)
             {
-                Console.WriteLine("\nКарта " + (i+1) + ":\n");
-                Console.WriteLine("Стоимость: " + cards[i].CostMana + " маны");
-                Console.WriteLine("Атака: " + cards[i].Attack);
-                Console.WriteLine("Здоровье: " + cards[i].Health);
-                Console.WriteLine("Тип существа: " + cards[i].Minion);
+                Console.WriteLine("\nКарта " + (i + 1) + ":\n");
+                Console.WriteLine("Стоимость: " + _hand[i].CostMana + " маны");
+                Console.WriteLine("Атака: " + _hand[i].Attack);
+                Console.WriteLine("Здоровье: " + _hand[i].Health);
+                Console.WriteLine("Тип существа: " + _hand[i].Minion);
             }
         }
 
-        private void ShowAllCardsStats(Stack<Card> cards)
+        public void EndTurn()
+        {
+            if (_mana < _maxMana)
+            {
+                _mana++;
+            }
+
+            _manaInTurn = _mana;
+        }
+
+        public void AddCardInTable()
+        {
+            Console.Write("Введите номер карты, которую хотите разыграть: ");
+
+            if (int.TryParse(Console.ReadLine(), out int cardNumber))
+            {
+                if (cardNumber >= 0 && cardNumber <= _hand.Count)
+                {
+                    if (_manaInTurn >= _hand[cardNumber - 1].CostMana)
+                    {
+                        if (_table.TryAddCardInTable(_hand[cardNumber - 1]))
+                        {
+                            _manaInTurn -= _hand[cardNumber - 1].CostMana;
+                            _hand.RemoveAt(cardNumber - 1);
+                            Console.WriteLine("Карта на столе!");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Стол переполнен");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("У вас не хватает маны");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Введен неверный номер карты");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ошибка ввода");
+            }
+        }
+
+        public void ShowAllTakenCards()
         {
             int cardNumber = 1;
 
-            foreach (var card in cards)
+            foreach (var card in _allTakenCards)
             {
                 Console.WriteLine("\nКарта " + cardNumber + ":\n");
                 Console.WriteLine("Стоимость: " + card.CostMana + " маны");
@@ -143,55 +191,9 @@ namespace Homework1_6_4
             }
         }
 
-        public void EndTurn()
-        {
-            if (_mana<_maxMana)
-            {
-                _mana++;
-            }
-
-            _manaInTurn = _mana;
-        }
-
-        public void AddCardInTable()
-        {
-            Console.Write("Введите номер карты, которую хотите разыграть: ");
-            int cardNumber = Convert.ToInt32(Console.ReadLine());
-
-            if (cardNumber >= 0 && cardNumber <= _hand.Count)
-            {
-                if (_manaInTurn >= _hand[cardNumber - 1].CostMana)
-                {
-                    if (_table.AddCardInTable(_hand[cardNumber - 1]))
-                    {
-                        _manaInTurn -= _hand[cardNumber - 1].CostMana;
-                        _hand.RemoveAt(cardNumber - 1);
-                        Console.WriteLine("Карта на столе!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Стол переполнен");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("У вас не хватает маны");
-                }
-            }
-            else
-            {
-                Console.WriteLine("Введен неверный номер карты");
-            }
-        }
-
-        public void ShowAllTakenCards()
-        {
-            ShowAllCardsStats(_allTakenCards);
-        }
-
         public void ShowMana()
         {
-            Console.WriteLine("Мана: "+_manaInTurn +"/" + _mana);
+            Console.WriteLine("Мана: " + _manaInTurn + "/" + _mana);
         }
     }
 
@@ -200,12 +202,12 @@ namespace Homework1_6_4
         private int _countCards;
         private Stack<Card> _cardsInDeck = new Stack<Card>();
 
-        public Deck(int countCards=30)
+        public Deck(int countCards = 30)
         {
             _countCards = countCards;
             Random random = new Random();
 
-            while (_cardsInDeck.Count<_countCards)
+            while (_cardsInDeck.Count < _countCards)
             {
                 int minCostManaCard = 0;
                 int maxCostManaCard = 10;
@@ -216,12 +218,12 @@ namespace Homework1_6_4
                 int minIndexTypeMinion = 0;
                 int maxIndexTypeMinion = 2;
 
-                int costManaCard = random.Next(minCostManaCard, maxCostManaCard+1);
-                int healthCard = random.Next(minHealthCard, maxHealthCard+1);
-                int attackCard = random.Next(minAttackCard, maxAttackCard+1);
-                Minion minionCard = (Minion)random.Next(minIndexTypeMinion, maxIndexTypeMinion+1);
+                int costManaCard = random.Next(minCostManaCard, maxCostManaCard + 1);
+                int healthCard = random.Next(minHealthCard, maxHealthCard + 1);
+                int attackCard = random.Next(minAttackCard, maxAttackCard + 1);
+                Minion minionCard = (Minion)random.Next(minIndexTypeMinion, maxIndexTypeMinion + 1);
 
-                _cardsInDeck.Push(new Card(costManaCard,healthCard,attackCard,minionCard));
+                _cardsInDeck.Push(new Card(costManaCard, healthCard, attackCard, minionCard));
             }
         }
 
@@ -232,7 +234,7 @@ namespace Homework1_6_4
 
         public bool IsEmptyDeck()
         {
-            if (_cardsInDeck.Count>0)
+            if (_cardsInDeck.Count > 0)
             {
                 return false;
             }
@@ -269,14 +271,14 @@ namespace Homework1_6_4
         private int _maxSpots;
         private List<Card> _cardsInTable = new List<Card>();
 
-        public Table(int maxSpots=7)
+        public Table(int maxSpots = 7)
         {
             _maxSpots = maxSpots;
         }
 
-        public bool AddCardInTable(Card card)
+        public bool TryAddCardInTable(Card card)
         {
-            if (_cardsInTable.Count<_maxSpots)
+            if (_cardsInTable.Count < _maxSpots)
             {
                 _cardsInTable.Add(card);
                 return true;
@@ -286,3 +288,17 @@ namespace Homework1_6_4
         }
     }
 }
+ /*   class Game
+    {
+        private Player _player1;
+        private Player _player2;
+
+        public Game(Player player1,Player player2)
+        {
+            _player1 = player1;
+            _player2 = player2;
+        }
+
+
+    }
+}*/
